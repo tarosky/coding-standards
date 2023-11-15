@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<ruleset name="Tarosky">
+	<description>Base PHPCS ruleset of Tarosky Coding Standards.</description>
+
+	<!-- Exclude pattern -->
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<!-- Hard-code command line values -->
+	<arg name="extensions" value="php" />
+	<arg name="colors"/>
+	<arg value="ps"/>
+
+	<!-- PHP_CodeSniffer VariableAnalysis -->
+	<rule ref="VariableAnalysis"/>
+
+	<rule ref="WordPress-Core"></rule>
+
+	<rule ref="WordPress-Docs"></rule>
+
+	<rule ref="WordPress-Extra"></rule>
+
+</ruleset>
