@@ -12,6 +12,7 @@
 		}
 	],
     "require": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
         "sirbrillig/phpcs-variable-analysis": "^2.11",
         "wp-coding-standards/wpcs": "^3.0"
     },
