@@ -1,23 +1,111 @@
 <?xml version="1.0" ?>
 <ruleset name="Tarosky">
-	<description>Base PHPCS ruleset of Tarosky Coding Standards.</description>
+	<description>PHPCS ruleset of Tarosky Coding Standards.</description>
 
 	<!-- Exclude pattern -->
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
-	<!-- Hard-code command line values -->
+	<!-- PHPCS デフォルト: PHPファイルのみチェックする。 -->
 	<arg name="extensions" value="php" />
+
+	<!-- PHPCS デフォルト: 色で見やすくする。 -->
 	<arg name="colors"/>
+
+	<!-- PHPCS デフォルト: p と s。 -->
 	<arg value="ps"/>
 
-	<!-- PHP_CodeSniffer VariableAnalysis -->
-	<rule ref="VariableAnalysis"/>
+	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
+	<rule ref="PHPCompatibilityWP" />
 
-	<rule ref="WordPress-Core"></rule>
+	<!-- 問題があるかもしれない変数をあぶり出す。 -->
+	<rule ref="VariableAnalysis" />
 
-	<rule ref="WordPress-Docs"></rule>
+	<!-- WordPress-Core -->
+	<rule ref="WordPress-Core">
+		<!-- クラスが定義されているファイルに `class-` プレフィックスのファイル名法則を強制しない。 -->
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 
-	<rule ref="WordPress-Extra"></rule>
+		<!-- short array や short ternary はOK -->
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+		<exclude name="Universal.Operators.DisallowShortTernary"/>
+
+		<!-- 複数行の double arrow assignment operator をそろえることを強制しない -->
+		<!-- <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" /> -->
+		<!-- <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" /> -->
+
+		<!-- Yoda conditions を強制しない -->
+		<exclude name="WordPress.PHP.YodaConditions" />
+
+
+
+
+		<!-- ラテン言語の文法を強制しない -->
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
+
+
+
+	</rule>
+
+	<!-- PHPDocs は必ず書く、ただし一部項目は強制しない。 -->
+	<rule ref="WordPress-Docs">
+		<!-- ファイル -->
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+		<exclude name="Squiz.Commenting.FileComment.MissingSubpackageTag" />
+		<exclude name="Squiz.Commenting.FileComment.CopyrightTagOrder" />
+		<exclude name="Squiz.Commenting.FileComment.AuthorTagOrder" />
+		<exclude name="Squiz.Commenting.FileComment.MissingAuthorTag" />
+		<exclude name="Squiz.Commenting.FileComment.MissingCopyrightTag" />
+		<!-- 関数 -->
+		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
+		<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
+		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
+		<!--
+
+
+
+
+
+		<exclude name="Generic.Commenting.DocComment.ParamNotFirst" />
+		<exclude name="Squiz.Commenting.FileComment.PackageTagOrder" />
+		<exclude name="Squiz.Commenting.FileComment.SubpackageTagOrder" />
+		-->
+	</rule>
+
+	<!-- Disallow changing PHP's timezone. -->
+	<rule ref="WordPress.DateTime.RestrictedFunctions">
+		<properties>
+			<!-- Allow other datetime functions, just not timezone. -->
+			<property name="exclude" type="array">
+				<element value="date" />
+			</property>
+		</properties>
+	</rule>
+
+	<!--<rule ref="WordPress-Docs"></rule>
+
+	<rule ref="WordPress-Extra"></rule>-->
+
+	<!--
+	see https://github.com/humanmade/coding-standards/blob/331324c4af6d17adbc60a2e6304b74d95474e04a/HM/ruleset.xml#L109C2-L126C9
+Restore the ability to have multiple arguments per line
+
+WPCS disallowed this behavior in 1.1.0, but we'd like to keep it until
+there is a reason to disallow multiple arguments.
+Ref: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/commit/bb8a48671e213a5588a6439ea52411eeefab4b0f
+-->
+	<rule ref="PEAR.Functions.FunctionCallSignature">
+		<properties>
+			<property name="allowMultipleArguments" value="true"/>
+		</properties>
+	</rule>
+	<rule ref="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
+		<severity>0</severity>
+	</rule>
 
 </ruleset>
