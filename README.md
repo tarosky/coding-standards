@@ -43,12 +43,10 @@ composer require --dev tarosky/coding-standards
 下記の例では `composer lint` で phpcs を使ったコードチェックを、 `composer fix` で phpcbf を使った自動修正を実行できます。
 
 ```json
-{
-	"scripts": {
-		"lint": "phpcs --standard=vendor/tarosky/coding-standards .",
-		"fix": "phpcbf --standard=vendor/tarosky/coding-standards ."
-	}
-}
+"scripts": {
+	"lint": "phpcs --standard=Tarosky .",
+	"fix": "phpcbf --standard=Tarosky ."
+},
 ```
 
 さらに、`composer lint` は GitHub Actions 等のCIツールを利用して、コミット時やプルリクエスト時に必ず実行されるようにしておくと、開発チーム全体でコードチェック漏れを防ぐことができます。
