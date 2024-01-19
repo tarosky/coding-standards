@@ -12,7 +12,7 @@
 	<!-- PHPCS デフォルト: 色で見やすくする。 -->
 	<arg name="colors"/>
 
-	<!-- PHPCS デフォルト: p と s。 -->
+	<!-- PHPCS デフォルト: pとs。 -->
 	<arg value="ps"/>
 
 	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
@@ -31,22 +31,12 @@
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
 		<exclude name="Universal.Operators.DisallowShortTernary"/>
 
-		<!-- 複数行の double arrow assignment operator をそろえることを強制しない -->
-		<!-- <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" /> -->
-		<!-- <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" /> -->
-
 		<!-- Yoda conditions を強制しない -->
 		<exclude name="WordPress.PHP.YodaConditions" />
-
-
-
 
 		<!-- ラテン言語の文法を強制しない -->
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
 		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
-
-
-
 	</rule>
 
 	<!-- PHPDocs は必ず書く、ただし一部項目は強制しない。 -->
@@ -62,16 +52,6 @@
 		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
 		<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
 		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
-		<!--
-
-
-
-
-
-		<exclude name="Generic.Commenting.DocComment.ParamNotFirst" />
-		<exclude name="Squiz.Commenting.FileComment.PackageTagOrder" />
-		<exclude name="Squiz.Commenting.FileComment.SubpackageTagOrder" />
-		-->
 	</rule>
 
 	<!-- Disallow changing PHP's timezone. -->
@@ -84,18 +64,13 @@
 		</properties>
 	</rule>
 
-	<!--<rule ref="WordPress-Docs"></rule>
-
-	<rule ref="WordPress-Extra"></rule>-->
+	<rule ref="WordPress-Extra"></rule>
 
 	<!--
 	see https://github.com/humanmade/coding-standards/blob/331324c4af6d17adbc60a2e6304b74d95474e04a/HM/ruleset.xml#L109C2-L126C9
-Restore the ability to have multiple arguments per line
-
-WPCS disallowed this behavior in 1.1.0, but we'd like to keep it until
-there is a reason to disallow multiple arguments.
-Ref: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/commit/bb8a48671e213a5588a6439ea52411eeefab4b0f
--->
+	Restore the ability to have multiple arguments per line WPCS disallowed this behavior in 1.1.0, but we'd like to keep it until there is a reason to disallow multiple arguments.
+	Ref: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/commit/bb8a48671e213a5588a6439ea52411eeefab4b0f
+	-->
 	<rule ref="PEAR.Functions.FunctionCallSignature">
 		<properties>
 			<property name="allowMultipleArguments" value="true"/>

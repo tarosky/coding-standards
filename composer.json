@@ -2,16 +2,17 @@
     "name": "tarosky/coding-standards",
     "description": "Tarosky Coding Standards for WordPress projects, using PHP_CodeSniffer ruleset.",
     "type": "phpcodesniffer-standard",
-	"homepage": "https://github.com/tarosky/coding-standards",
+    "homepage": "https://github.com/tarosky/coding-standards",
     "license": "GPL-2.0-or-later",
-	"authors": [
-		{
-			"name": "Tarosky Inc.",
-			"email": "info@tarosky.co.jp",
-			"homepage": "https://tarosky.co.jp"
-		}
-	],
+    "authors": [
+        {
+            "name": "Tarosky Inc.",
+            "email": "info@tarosky.co.jp",
+            "homepage": "https://tarosky.co.jp"
+        }
+    ],
     "require": {
+        "php": "^7.4 || ^8.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "sirbrillig/phpcs-variable-analysis": "^2.11",
         "wp-coding-standards/wpcs": "^3.0"
@@ -20,6 +21,6 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
-		"sort-packages": true
-	}
+        "sort-packages": true
+    }
 }
