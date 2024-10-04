@@ -27,14 +27,14 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 
-		<!-- short array や short ternary はOK -->
+		<!-- 配列の短縮構文や三項演算子はOK -->
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
 		<exclude name="Universal.Operators.DisallowShortTernary"/>
 
 		<!-- Yoda conditions を強制しない -->
 		<exclude name="WordPress.PHP.YodaConditions" />
 
-		<!-- ラテン言語の文法を強制しない -->
+		<!-- ラテン言語の文法を強制しない (@TODO できれば強制した上で日本語の場合の例外を付けたい) -->
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
 		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
 	</rule>
