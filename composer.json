@@ -6,9 +6,8 @@
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "Tarosky Inc.",
-            "email": "info@tarosky.co.jp",
-            "homepage": "https://tarosky.co.jp"
+            "name": "Tarosky INC.",
+            "email": "hi@tarosky.co.jp"
         }
     ],
     "require": {
@@ -22,5 +21,10 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "sort-packages": true
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
     }
 }

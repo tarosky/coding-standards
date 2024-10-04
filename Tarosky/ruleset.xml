@@ -15,9 +15,6 @@
 	<!-- PHPCS デフォルト: pとs。 -->
 	<arg value="ps"/>
 
-	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
-	<rule ref="PHPCompatibilityWP" />
-
 	<!-- 問題があるかもしれない変数をあぶり出す。 -->
 	<rule ref="VariableAnalysis" />
 
@@ -83,4 +80,6 @@
 		<severity>0</severity>
 	</rule>
 
+	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
+	<rule ref="PHPCompatibilityWP" />
 </ruleset>
