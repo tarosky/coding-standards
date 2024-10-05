@@ -6,13 +6,11 @@
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "Tarosky Inc.",
-            "email": "info@tarosky.co.jp",
-            "homepage": "https://tarosky.co.jp"
+            "name": "Tarosky INC.",
+            "email": "hi@tarosky.co.jp"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "sirbrillig/phpcs-variable-analysis": "^2.11",
         "wp-coding-standards/wpcs": "^3.1"
@@ -22,5 +20,10 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "sort-packages": true
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
     }
 }

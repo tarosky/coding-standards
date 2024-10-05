@@ -3,8 +3,12 @@
 	<description>PHPCS ruleset of Tarosky Coding Standards.</description>
 
 	<!-- Exclude pattern -->
+	<exclude-pattern>*/phpunit.xml*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*\.(css|js)</exclude-pattern>
 
 	<!-- PHPCS デフォルト: PHPファイルのみチェックする。 -->
 	<arg name="extensions" value="php" />
@@ -15,9 +19,6 @@
 	<!-- PHPCS デフォルト: pとs。 -->
 	<arg value="ps"/>
 
-	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
-	<rule ref="PHPCompatibilityWP" />
-
 	<!-- 問題があるかもしれない変数をあぶり出す。 -->
 	<rule ref="VariableAnalysis" />
 
@@ -27,14 +28,14 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 
-		<!-- short array や short ternary はOK -->
+		<!-- 配列の短縮構文や三項演算子はOK -->
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
 		<exclude name="Universal.Operators.DisallowShortTernary"/>
 
 		<!-- Yoda conditions を強制しない -->
 		<exclude name="WordPress.PHP.YodaConditions" />
 
-		<!-- ラテン言語の文法を強制しない -->
+		<!-- ラテン言語の文法を強制しない (@TODO できれば強制した上で日本語の場合の例外を付けたい) -->
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
 		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
 	</rule>
@@ -83,4 +84,9 @@
 		<severity>0</severity>
 	</rule>
 
+	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- PHP version check. -->
+	<config name="testVersion" value="8.2-"/>
 </ruleset>
