@@ -3,8 +3,12 @@
 	<description>PHPCS ruleset of Tarosky Coding Standards.</description>
 
 	<!-- Exclude pattern -->
+	<exclude-pattern>*/phpunit.xml*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*\.(css|js)</exclude-pattern>
 
 	<!-- PHPCS デフォルト: PHPファイルのみチェックする。 -->
 	<arg name="extensions" value="php" />
@@ -81,5 +85,8 @@
 	</rule>
 
 	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
-	<rule ref="PHPCompatibilityWP" />
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- PHP version check. -->
+	<config name="testVersion" value="8.2-"/>
 </ruleset>
