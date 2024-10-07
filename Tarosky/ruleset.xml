@@ -2,7 +2,7 @@
 <ruleset name="Tarosky">
 	<description>PHPCS ruleset of Tarosky Coding Standards.</description>
 
-	<!-- Exclude pattern -->
+	<!-- チェックから除外するディレクトリやファイルのパターン。 -->
 	<exclude-pattern>*/phpunit.xml*</exclude-pattern>
 	<exclude-pattern>*/dist/*</exclude-pattern>
 	<exclude-pattern>*/languages/*</exclude-pattern>
@@ -19,10 +19,10 @@
 	<!-- PHPCS デフォルト: pとs。 -->
 	<arg value="ps"/>
 
-	<!-- 問題があるかもしれない変数をあぶり出す。 -->
-	<rule ref="VariableAnalysis" />
+	<!-- PHPバージョンチェック。 -->
+	<config name="testVersion" value="8.2-"/>
 
-	<!-- WordPress-Core -->
+	<!-- WPCS: WordPress-Core。 -->
 	<rule ref="WordPress-Core">
 		<!-- クラスが定義されているファイルに `class-` プレフィックスのファイル名法則を強制しない。 -->
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
@@ -40,36 +40,8 @@
 		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
 	</rule>
 
-	<!-- PHPDocs は必ず書く、ただし一部項目は強制しない。 -->
-	<rule ref="WordPress-Docs">
-		<!-- ファイル -->
-		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
-		<exclude name="Squiz.Commenting.FileComment.MissingSubpackageTag" />
-		<exclude name="Squiz.Commenting.FileComment.CopyrightTagOrder" />
-		<exclude name="Squiz.Commenting.FileComment.AuthorTagOrder" />
-		<exclude name="Squiz.Commenting.FileComment.MissingAuthorTag" />
-		<exclude name="Squiz.Commenting.FileComment.MissingCopyrightTag" />
-		<!-- 関数 -->
-		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
-		<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
-		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
-	</rule>
-
-	<!-- Disallow changing PHP's timezone. -->
-	<rule ref="WordPress.DateTime.RestrictedFunctions">
-		<properties>
-			<!-- Allow other datetime functions, just not timezone. -->
-			<property name="exclude" type="array">
-				<element value="date" />
-			</property>
-		</properties>
-	</rule>
-
-	<rule ref="WordPress-Extra"></rule>
-
 	<!--
-	see https://github.com/humanmade/coding-standards/blob/331324c4af6d17adbc60a2e6304b74d95474e04a/HM/ruleset.xml#L109C2-L126C9
-	Restore the ability to have multiple arguments per line WPCS disallowed this behavior in 1.1.0, but we'd like to keep it until there is a reason to disallow multiple arguments.
+	複数の引数を同じ行に書くことを許可する。
 	Ref: https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/commit/bb8a48671e213a5588a6439ea52411eeefab4b0f
 	-->
 	<rule ref="PEAR.Functions.FunctionCallSignature">
@@ -84,9 +56,37 @@
 		<severity>0</severity>
 	</rule>
 
-	<!-- PHP cross-version compatibility issues in projects based on the WordPress CMS -->
-	<rule ref="PHPCompatibilityWP"/>
+	<!-- WPCS: WordPress-Docs。PHPDocs は必ず書く、ただし一部項目は強制しない。 -->
+	<rule ref="WordPress-Docs">
+		<!-- ファイルコメント -->
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+		<exclude name="Squiz.Commenting.FileComment.MissingSubpackageTag" />
+		<exclude name="Squiz.Commenting.FileComment.CopyrightTagOrder" />
+		<exclude name="Squiz.Commenting.FileComment.AuthorTagOrder" />
+		<exclude name="Squiz.Commenting.FileComment.MissingAuthorTag" />
+		<exclude name="Squiz.Commenting.FileComment.MissingCopyrightTag" />
+		<!-- 関数コメント -->
+		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
+		<exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
+		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
+	</rule>
 
-	<!-- PHP version check. -->
-	<config name="testVersion" value="8.2-"/>
+	<!-- PHPの timezone の変更を許可しない。 -->
+	<rule ref="WordPress.DateTime.RestrictedFunctions">
+		<properties>
+			<!-- その他の datetime 関数は許可する。許可しないのは timezone のみ。 -->
+			<property name="exclude" type="array">
+				<element value="date" />
+			</property>
+		</properties>
+	</rule>
+
+	<!-- WPCS: WordPress-Extra。 -->
+	<rule ref="WordPress-Extra"></rule>
+
+	<!-- 問題があるかもしれない変数をあぶり出す。 -->
+	<rule ref="VariableAnalysis" />
+
+	<!-- プロジェクト内に、WordPressのPHPに対するクロスバージョンの互換性にイシューがあるかどうかをチェックする。-->
+	<rule ref="PHPCompatibilityWP"/>
 </ruleset>
