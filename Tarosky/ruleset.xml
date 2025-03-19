@@ -38,6 +38,7 @@
 		<!-- ラテン言語の文法を強制しない (@TODO できれば強制した上で日本語の場合の例外を付けたい) -->
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
 		<exclude name="Generic.Commenting.DocComment.LongNotCapital" />
+		<exclude name="Generic.Commenting.DocComment.ShortNotCapital" />
 	</rule>
 
 	<!--
