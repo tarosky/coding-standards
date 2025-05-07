@@ -88,6 +88,17 @@
 	<!-- 問題があるかもしれない変数をあぶり出す。 -->
 	<rule ref="VariableAnalysis" />
 
+	<!-- var_dump を入れたままデプロイしない -->
+	<rule ref="Generic.PHP.ForbiddenFunctions">
+		<properties>
+			<property name="forbiddenFunctions" type="array">
+				<element key="print_r" value="null"/>
+				<element key="create_function" value="null"/>
+				<element key="var_dump" value="null"/>
+			</property>
+		</properties>
+	</rule>
+	
 	<!-- プロジェクト内に、WordPressのPHPに対するクロスバージョンの互換性にイシューがあるかどうかをチェックする。-->
 	<rule ref="PHPCompatibilityWP"/>
 </ruleset>
