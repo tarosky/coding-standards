@@ -2,6 +2,10 @@
 vendor/
 composer.lock
 
+# Temporary files from dependency updates
+composer.lock.backup
+/tmp/
+
 # Make sure to ignore other stuff.
 .DS_Store
 .idea/

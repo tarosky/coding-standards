@@ -50,3 +50,39 @@ composer require --dev tarosky/coding-standards
 ```
 
 さらに、`composer lint` は GitHub Actions 等のCIツールを利用して、コミット時やプルリクエスト時に必ず実行されるようにしておくと、開発チーム全体でコードチェック漏れを防ぐことができます。
+
+## 依存関係の更新
+
+このパッケージの依存関係を最新の状態に保つために、以下のコマンドが利用できます。
+
+### Composer スクリプト
+
+```bash
+# 古くなった依存関係をチェック
+composer update-check
+
+# 本番環境の依存関係のみを更新
+composer update-deps
+
+# 開発環境も含めたすべての依存関係を更新
+composer update-deps-dev
+```
+
+### 手動での更新
+
+依存関係を安全に更新するためのスクリプトが提供されています：
+
+```bash
+./update-dependencies.sh
+```
+
+このスクリプトは以下の処理を行います：
+- 古くなった依存関係の確認
+- composer.lock のバックアップ作成
+- 依存関係の更新
+- PHP_CodeSniffer ルールセットの動作確認
+- 問題があった場合の自動ロールバック
+
+### 自動更新
+
+GitHub Actions により、毎週月曜日に依存関係の更新チェックが自動実行されます。更新が必要な場合は、自動的にプルリクエストが作成されます。

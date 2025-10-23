@@ -15,6 +15,15 @@
         "sirbrillig/phpcs-variable-analysis": "^2.11",
         "wp-coding-standards/wpcs": "^3.1"
     },
+    "scripts": {
+        "check-outdated": "composer outdated --direct --strict",
+        "update-deps": "composer update --no-interaction --no-dev",
+        "update-deps-dev": "composer update --no-interaction",
+        "update-check": [
+            "@check-outdated",
+            "echo 'Run `composer update-deps` to update production dependencies or `composer update-deps-dev` to update all dependencies'"
+        ]
+    },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true

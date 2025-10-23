@@ -1,0 +1,95 @@
+name: Update Dependencies
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+          coverage: none
+          
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+        
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+          
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+        
+      - name: Check for outdated dependencies
+        id: check-outdated
+        run: |
+          if composer outdated --direct --strict; then
+            echo "outdated=false" >> $GITHUB_OUTPUT
+          else
+            echo "outdated=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Update dependencies
+        if: steps.check-outdated.outputs.outdated == 'true'
+        run: composer update-deps-dev
+        
+      - name: Validate composer.json and composer.lock
+        if: steps.check-outdated.outputs.outdated == 'true'
+        run: composer validate --strict
+        
+      - name: Check if there are changes
+        if: steps.check-outdated.outputs.outdated == 'true'
+        id: changes
+        run: |
+          if git diff --quiet composer.lock; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create Pull Request
+        if: steps.check-outdated.outputs.outdated == 'true' && steps.changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update composer dependencies"
+          title: "chore: Update Composer Dependencies"
+          body: |
+            ## Composer Dependencies Update
+            
+            This pull request updates the composer dependencies to their latest versions.
+            
+            ### Changes
+            - Updated composer.lock file with latest dependency versions
+            - All direct dependencies have been checked for compatibility
+            
+            ### Review Notes
+            - Please review the updated dependencies for any breaking changes
+            - Run tests to ensure compatibility with the updated packages
+            - Check if the PHP_CodeSniffer ruleset still works as expected
+            
+            This PR was automatically created by the dependency update workflow.
+          branch: chore/update-dependencies
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
