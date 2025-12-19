@@ -1,6 +1,5 @@
 # Ignore composer stuff.
 vendor/
-composer.lock
 
 # Make sure to ignore other stuff.
 .DS_Store
