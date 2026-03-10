@@ -88,6 +88,15 @@
 	<!-- WPCS: WordPress-Extra。 -->
 	<rule ref="WordPress-Extra"></rule>
 
+	<!-- error_log() は本番ログとして使用するため許可する -->
+	<rule ref="WordPress.PHP.DevelopmentFunctions">
+		<properties>
+			<property name="customFunctions" type="array">
+				<element key="error_log" value="false"/>
+			</property>
+		</properties>
+	</rule>
+
 	<!-- 問題があるかもしれない変数をあぶり出す。 -->
 	<rule ref="VariableAnalysis" />
 
