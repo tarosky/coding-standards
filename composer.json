@@ -11,9 +11,8 @@
         }
     ],
     "require": {
-        "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "sirbrillig/phpcs-variable-analysis": "^2.11",
-        "wp-coding-standards/wpcs": "^3.1"
+        "sirbrillig/phpcs-variable-analysis": "^2.13",
+        "wp-coding-standards/wpcs": "^3.3"
     },
     "config": {
         "allow-plugins": {
@@ -22,8 +21,5 @@
         "sort-packages": true
     },
     "prefer-stable": true,
-    "minimum-stability": "dev",
-    "require-dev": {
-        "phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
-    }
+    "minimum-stability": "dev"
 }
