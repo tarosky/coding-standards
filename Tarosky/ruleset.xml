@@ -98,7 +98,4 @@
 			</property>
 		</properties>
 	</rule>
-	
-	<!-- プロジェクト内に、WordPressのPHPに対するクロスバージョンの互換性にイシューがあるかどうかをチェックする。-->
-	<rule ref="PHPCompatibilityWP"/>
 </ruleset>
