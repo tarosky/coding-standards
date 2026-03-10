@@ -22,6 +22,9 @@
 	<!-- PHPバージョンチェック。 -->
 	<config name="testVersion" value="8.2-"/>
 
+	<!-- Rules: サポートする WordPress の最低バージョン -->
+	<config name="minimum_supported_wp_version" value="6.6"/>
+
 	<!-- WPCS: WordPress-Core。 -->
 	<rule ref="WordPress-Core">
 		<!-- クラスが定義されているファイルに `class-` プレフィックスのファイル名法則を強制しない。 -->
