@@ -101,7 +101,14 @@
 	</rule>
 
 	<!-- 問題があるかもしれない変数をあぶり出す。 -->
-	<rule ref="VariableAnalysis" />
+	<rule ref="VariableAnalysis">
+		<properties>
+			<!-- ただし、テンプレート間で変数を渡す場合があるのでそれは許可する。例 テンプレートパーツで渡ってくる $args -->
+			<property name="allowUnusedVariablesBeforeRequire" value="true"/>
+			<!-- ただし、グローバル変数を使う場合があるのでそれは許可する。例 global $wpdb  -->
+			<property name="allowUndefinedVariablesInFileScope" value="true"/>
+		</properties>
+	</rule>
 
 	<!-- var_dump を入れたままデプロイしない -->
 	<rule ref="Generic.PHP.ForbiddenFunctions">
