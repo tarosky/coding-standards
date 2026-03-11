@@ -108,4 +108,11 @@
 			</property>
 		</properties>
 	</rule>
+
+	<!-- コメントアウトされた文字列に許可されるコードの割合はデフォルトの60%から少し緩めて75%にする。 -->
+	<rule ref="Squiz.PHP.CommentedOutCode">
+		<properties>
+			<property name="maxPercentage" value="75"/>
+		</properties>
+	</rule>
 </ruleset>
