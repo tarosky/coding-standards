@@ -88,6 +88,9 @@
 	<!-- WPCS: WordPress-Extra。 -->
 	<rule ref="WordPress-Extra"></rule>
 
+	<!-- 未エスケープの出力を検知。WPCSに定義は含まれているがデフォルトでは無効化されているので有効化する。 -->
+	<rule ref="WordPress.Security.EscapeOutput"/>
+
 	<!-- error_log() は本番ログとして使用するため許可する -->
 	<rule ref="WordPress.PHP.DevelopmentFunctions">
 		<properties>
