@@ -90,6 +90,10 @@
 
 	<!-- 未エスケープの出力を検知。WPCSに定義は含まれているがデフォルトでは無効化されているので有効化する。 -->
 	<rule ref="WordPress.Security.EscapeOutput"/>
+	<!-- 未サニタイズの入力（例: $_POST, $_GET など）の使用を検知 -->
+	<rule ref="WordPress.Security.ValidatedSanitizedInput"/>
+	<!-- CSRF 対策: check_admin_referer() または wp_verify_nonce() の確認を強制 -->
+	<rule ref="WordPress.Security.NonceVerification"/>
 
 	<!-- error_log() は本番ログとして使用するため許可する -->
 	<rule ref="WordPress.PHP.DevelopmentFunctions">
@@ -110,11 +114,18 @@
 		</properties>
 	</rule>
 
-	<!-- var_dump を入れたままデプロイしない -->
+	<!-- 下記変数の利用はセキュリティ上許可しない -->
 	<rule ref="Generic.PHP.ForbiddenFunctions">
 		<properties>
 			<property name="forbiddenFunctions" type="array">
 				<element key="create_function" value="null"/>
+				<element key="eval" value="null"/>
+				<element key="exec" value="null"/>
+				<element key="shell_exec" value="null"/>
+				<element key="system" value="null"/>
+				<element key="passthru" value="null"/>
+				<element key="popen" value="null"/>
+				<element key="proc_open" value="null"/>
 			</property>
 		</properties>
 	</rule>
