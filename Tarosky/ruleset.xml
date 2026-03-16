@@ -98,8 +98,8 @@
 	<!-- error_log() は本番ログとして使用するため許可する -->
 	<rule ref="WordPress.PHP.DevelopmentFunctions">
 		<properties>
-			<property name="customFunctions" type="array">
-				<element key="error_log" value="false"/>
+			<property name="exclude" type="array">
+				<element value="error_log"/>
 			</property>
 		</properties>
 	</rule>
